@@ -56,12 +56,18 @@ impl Grid {
         cell_neighbours
     }
 
-    pub fn get_water_volume(&self, x: usize, y: usize) -> f32 {
-        let cell = self.get_cell(x, y);
+    pub fn get_cell_neighbours_with_lower_water_level(&self, x: usize, y: usize) -> Vec<&Node> {
+        let water_level = self.get_cell(x, y).water_level();
         let cell_neighbours = self.get_cell_neighbours(x, y);
+        cell_neighbours.iter()
+            .filter(|n|  n.water_level() < water_level)
+            .map(|n| *n)
+            .collect::<Vec<&Node>>()
+    }
 
-        // TODO: Implement water volume calculation
-        0.0
+    pub fn water_volume_of_cell(&self, x: usize, y: usize) -> f32 {
+        let cell = self.get_cell(x, y);
+        self.cell_size*self.cell_size*cell.depth
     }
 }
 
@@ -211,5 +217,14 @@ mod grid_tests {
         let cell_neighbours = grid.get_cell_neighbours(grid.n_cols-1, 1);
 
         assert_eq!(cell_neighbours.len(), 5);
+    }
+
+
+    #[test]
+    fn test_get_cell_neighbours_with_lower_water_levels() {
+        let grid = create_test_grid_no1();
+        let cell_neighbours = grid.get_cell_neighbours_with_lower_water_level(1, 1);
+
+        assert_eq!(cell_neighbours.len(), 4);
     }
 }
