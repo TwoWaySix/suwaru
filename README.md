@@ -1,2 +1,2 @@
-# suwaru
-SUWARU - SUrface WAter RUnoff: Simulating rainwater runoff on a gridded mesh.
+# suwaru - **su**rface **wa**ter **ru**noff: 
+Simulating rainwater runoff on a gridded mesh.
