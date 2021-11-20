@@ -65,6 +65,7 @@ impl Grid {
             .collect::<Vec<&Node>>()
     }
 
+    // TODO: Check, if neighbouring cells really can be ignored and this is volume conservant
     pub fn water_volume_of_cell(&self, x: usize, y: usize) -> f32 {
         let cell = self.get_cell(x, y);
         self.cell_size*self.cell_size*cell.depth
