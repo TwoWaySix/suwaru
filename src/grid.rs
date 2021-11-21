@@ -37,6 +37,10 @@ impl Grid {
         &self.cells[y*self.n_cols + x]
     }
 
+    pub fn get_cell_mut(&mut self, x: usize, y: usize) -> &mut RasterCell {
+        &mut self.cells[y*self.n_cols + x]
+    }
+
     pub fn get_cell_neighbours(&self, x: usize, y: usize) -> Vec<&RasterCell> {
         let mut cell_neighbours = Vec::new();
 
