@@ -1,8 +1,5 @@
-mod rastercell;
-mod grid;
-mod simulation;
-mod hydraulics;
+use suwaru::run;
 
 fn main() {
-    println!("Hello, world!");
+    run();
 }
