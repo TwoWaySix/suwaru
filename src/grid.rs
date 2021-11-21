@@ -1,11 +1,11 @@
-use crate::node::Node;
+use crate::rastercell::RasterCell;
 
 #[derive(Debug)]
 pub struct Grid {
     pub n_cols: usize,
     pub n_rows: usize,
     pub cell_size: f32,
-    pub cells: Vec<Node>,
+    pub cells: Vec<RasterCell>,
 }
 
 impl Grid {
@@ -33,11 +33,11 @@ impl Grid {
         }
     }
 
-    pub fn get_cell(&self, x: usize, y: usize) -> &Node {
+    pub fn get_cell(&self, x: usize, y: usize) -> &RasterCell {
         &self.cells[y*self.n_cols + x]
     }
 
-    pub fn get_cell_neighbours(&self, x: usize, y: usize) -> Vec<&Node> {
+    pub fn get_cell_neighbours(&self, x: usize, y: usize) -> Vec<&RasterCell> {
         let mut cell_neighbours = Vec::new();
 
         let x_from = if x != 0 { x-1 } else { 0 };
@@ -56,13 +56,13 @@ impl Grid {
         cell_neighbours
     }
 
-    pub fn get_cell_neighbours_with_lower_water_level(&self, x: usize, y: usize) -> Vec<&Node> {
+    pub fn get_cell_neighbours_with_lower_water_level(&self, x: usize, y: usize) -> Vec<&RasterCell> {
         let water_level = self.get_cell(x, y).water_level();
         let cell_neighbours = self.get_cell_neighbours(x, y);
         cell_neighbours.iter()
             .filter(|n|  n.water_level() < water_level)
             .map(|n| *n)
-            .collect::<Vec<&Node>>()
+            .collect::<Vec<&RasterCell>>()
     }
 
     // TODO: Check, if neighbouring cells really can be ignored and this is volume conservant
@@ -86,12 +86,12 @@ impl PartialEq for Grid {
 #[cfg(test)]
 mod grid_tests {
     use crate::grid::Grid;
-    use crate::node::Node;
+    use crate::rastercell::RasterCell;
 
     fn create_test_grid_no1() -> Grid {
         let mut grid = Grid::new(4,3, 1.0);
         for i in 0..12 {
-            let node = Node::new_with_xyz(0, 0, i as f32);
+            let node = RasterCell::new_with_xyz(0, 0, i as f32);
             grid.cells.push(node);
         }
         grid

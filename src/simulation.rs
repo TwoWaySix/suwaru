@@ -16,4 +16,8 @@ impl Simulation {
             timestep,
         }
     }
+
+    pub fn advance_by_timestep(&mut self) {
+
+    }
 }
