@@ -102,7 +102,6 @@ mod gms_tests {
 
     #[test]
     fn test_average_kst() {
-        let cell_size = 1.0;
         let cell1 = RasterCell::new_with_xyzh(0, 0, 1.5, 0.25);
         let mut cell2 = RasterCell::new_with_xyzh(0, 0, 1.0, 0.5);
         cell2.kst = 10.0;
@@ -115,7 +114,6 @@ mod gms_tests {
 
     #[test]
     fn test_average_depth() {
-        let cell_size = 1.0;
         let cell1 = RasterCell::new_with_xyzh(0, 0, 1.5, 0.25);
         let mut cell2 = RasterCell::new_with_xyzh(0, 0, 1.0, 0.5);
         cell2.kst = 10.0;

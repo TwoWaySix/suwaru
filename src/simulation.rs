@@ -3,7 +3,6 @@ use crate::grid::Grid;
 pub struct Simulation {
     pub grid: Grid,
     pub buffer: Grid,
-    pub timestep: f32,
 }
 
 impl Simulation {
@@ -13,11 +12,12 @@ impl Simulation {
         Simulation {
             grid,
             buffer: cloned_grid,
-            timestep,
         }
     }
 
-    pub fn advance_by_timestep(&mut self) {
+    pub fn advance_by_timestep(&mut self, timestep: f32) {
+        for cell in &self.grid.cells {
 
+        }
     }
 }
