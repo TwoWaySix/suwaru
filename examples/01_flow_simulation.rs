@@ -6,11 +6,11 @@ use suwaru::simulation::Simulation;
 
 fn main() {
     // Parameters
-    let n_cols = 40;
+    let n_cols = 400;
     let n_rows = 20;
     let cell_size = 1.0; // in meters
-    let starting_depth = 0.1; // in meters
-    let timestep = 0.0001; // in seconds
+    let starting_depth = 0.5; // in meters
+    let timestep = 0.001; // in seconds
     let n_timesteps = 100000;
 
 
@@ -30,11 +30,11 @@ fn main() {
     // Running the simulation
     for i in 0..n_timesteps {
         if (i+1) % 1000 == 0 {
-            // println!("- Step {} of {}", i+1, n_timesteps);
+            println!("Step {} of {}", i+1, n_timesteps);
             println!("Water level of cell ({}, {}): {}m",
                      35,
                      10,
-                     simulation.grid.get_cell(35, 10).depth
+                     simulation.grid.get_cell(350, 10).depth
             );
             let img_name = format!("./temp/depths_{:08}.jpg", i+1);
             plot_depths(&simulation.grid, &PathBuf::from(img_name));
@@ -50,10 +50,10 @@ fn setup_cells(n_cols: usize, n_rows: usize, starting_depth: f32) -> Vec<RasterC
     for y in 0..n_rows {
         for x in 0..n_cols {
             let elevation = match x {
-                0..=10 => 16.0 - (x as f32),
-                10..=20 => 11.0 - (x as f32)/2.0,
-                20..=30 => 3.0 - (x as f32)/10.0,
-                30..=40 => 0.0,
+                0..=100 => 160.0 - (x as f32),
+                100..=200 => 110.0 - (x as f32)/2.0,
+                200..=300 => 30.0 - (x as f32)/10.0,
+                300..=400 => 0.0,
                 _ => 0.0,
             };
             cells.push(

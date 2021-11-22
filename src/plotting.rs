@@ -10,7 +10,7 @@ pub fn plot_depths(grid: &Grid, path: &Path) {
 
     for y in 0..grid.n_rows {
         for x in 0..grid.n_cols {
-            let scale = scale_color(grid.get_cell(x, y).depth, 0.5);
+            let scale = scale_color(grid.get_cell(x, y).depth, 3.0);
             let color = Rgb([255-scale, 255-scale, 255]);
             img.put_pixel(x as u32, y as u32, color);
         }
